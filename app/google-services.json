@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "888994518161",
+    "firebase_url": "https://e-billing-d7a2d.firebaseio.com",
+    "project_id": "e-billing-d7a2d",
+    "storage_bucket": "e-billing-d7a2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888994518161:android:e752582301a2bcd6e15b30",
+        "android_client_info": {
+          "package_name": "com.example.ebillings"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888994518161-j7dafvfm3cdj44lj277c0v5fciapkg8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvikQb66SdAZSoaiCxDxyLmUXuzYOMv1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888994518161-j7dafvfm3cdj44lj277c0v5fciapkg8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

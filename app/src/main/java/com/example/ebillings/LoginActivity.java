@@ -7,9 +7,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,24 +32,54 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText email,password;
-    Button login_btn;
-    TextView singup_txt;
-    String Phone;
+    private EditText email,password;
+    private Button login_btn;
+    private TextView singup_txt;
+    private static String Phone;
+    private TextView register;
+    private TextView forgotPassword;
     private final int REQUEST_CODE = 2;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkSession();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences phoneNumber = getSharedPreferences("PHONE_NUMBER", HomeActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor =  phoneNumber.edit();
+        editor.putString("PHONE", Phone);
+        editor.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        login_btn = findViewById(R.id.login_btn);
+        email           = findViewById(R.id.email);
+        password        = findViewById(R.id.password);
+        login_btn       = findViewById(R.id.login_btn);
+        forgotPassword  = findViewById(R.id.forgotPassword);
+        register        = findViewById(R.id.register);
 
         //Init firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference tabel_user = database.getReference("User");
 
+        //Go to Register User Page
+        register.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Intent toRegisterUser = new Intent(LoginActivity.this, registerUser.class);
+                startActivity(toRegisterUser);
+                return false;
+            }
+        });
+
+        //Handle login logic
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +107,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                     if (user.getPassword().equals(password.getText().toString())) {
                                         //Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        Intent toHome = new Intent(LoginActivity.this, HomeActivity.class);
-                                        toHome.putExtra("Phone", phone);
-                                        startActivity(toHome);
+                                        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+                                        sessionManagement.saveSession(user);
+                                        moveToHomeActivity(Phone);
                                     } else {
                                         showErrorDialog("Password Incorrect!");
                                         //Toast.makeText(LoginActivity.this, "Password Incorrect!", Toast.LENGTH_SHORT).show();
@@ -100,6 +132,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkSession() {
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        String isLoggedIn = sessionManagement.getSession();
+        SharedPreferences phoneNumber = getSharedPreferences("PHONE_NUMBER", HomeActivity.MODE_PRIVATE);
+        Phone = phoneNumber.getString("PHONE", null);
+        if(isLoggedIn != null){
+            moveToHomeActivity(Phone);
+        }
+    }
+
+    private void moveToHomeActivity(String phone) {
+        Intent toHome = new Intent(LoginActivity.this, HomeActivity.class);
+        toHome.putExtra("Phone", phone);
+        toHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toHome);
     }
 
     private  void showWarningDialog(String text){

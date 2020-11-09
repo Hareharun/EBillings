@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_food"
+            android:icon="@drawable/ic_baseline_fastfood_24"
+            android:title="Food" />
+        <item
+            android:id="@+id/nav_accomodation"
+            android:icon="@drawable/ic_baseline_hotel_24"
+            android:title="Accomodation" />
+        <item
+            android:id="@+id/nav_homeneeds"
+            android:icon="@drawable/ic_baseline_emoji_objects_24"
+            android:title="Home Needs" />
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_baseline_person_24"
+                    android:title="My Profile" />
+            </group>
+        </menu>
+    </item>
+
+
+</menu>

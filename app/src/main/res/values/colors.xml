@@ -8,4 +8,5 @@
     <color name="colorWarning">#FFCC00</color>
     <color name="colorError">#CC0000</color>
     <color name="textPrimary">#212121</color>
+    <color name="colorCell">#003366</color>
 </resources>

@@ -30,12 +30,13 @@ public class BillDetailsAdapter extends ArrayAdapter<BillDetailsModel> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         TextView product, quantity, total, mrp;
-        String Product = getItem(position).getProduct();
+        String ProductCode = getItem(position).ProductCode;
+        String ProductName = getItem(position).ProductName;
         String Quantity = getItem(position).getQuantity();
         String Total = getItem(position).getTotal();
         String MRP = getItem(position).getMRP();
 
-        BillDetailsModel bill = new BillDetailsModel(Product, Quantity, Total, MRP);
+        BillDetailsModel bill = new BillDetailsModel(ProductCode, ProductName, Quantity, Total, MRP);
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
         convertView.setBackgroundColor(Color.TRANSPARENT);
@@ -43,7 +44,7 @@ public class BillDetailsAdapter extends ArrayAdapter<BillDetailsModel> {
         quantity = convertView.findViewById(R.id.quantity);
         total = convertView.findViewById(R.id.total);
         mrp = convertView.findViewById(R.id.mrp);
-        product.setText(Product);
+        product.setText(ProductName);
         quantity.setText(Quantity);
         total.setText(Total);
         mrp.setText(MRP);

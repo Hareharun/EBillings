@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/blue"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Financial Analysis"
+            android:textColor="#2CA7E0"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:textSize="25dp"
+            />
+
+        <EditText
+            android:id="@+id/income"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter Income"
+            android:textColorHint="#2CA7E0"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/edit"
+            android:padding="20dp"
+            />
+
+        <TextView
+            android:id="@+id/groceryTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Financial Analysis"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dresses: ₹4065"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food: ₹3000"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accomodation: ₹5000"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miscellaneous: ₹3000"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicine: ₹2000"
+            android:textColor="#2CA7E0"
+            android:layout_gravity="left"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            />
+
+        <Button
+            android:id="@+id/show_chart"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="Show Chart"
+            android:textColor="#fff"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

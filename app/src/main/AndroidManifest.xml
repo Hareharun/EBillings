@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BillDetails"></activity>
+        <activity android:name=".financeAnalysis"></activity>
+        <activity android:name=".vegetableBills" />
+        <activity android:name=".foodBills" />
+        <activity android:name=".groceryBills" />
+        <activity android:name=".FinancialAnalysisChart" />
+        <activity android:name=".budgetCalculator" />
+        <activity android:name=".BillDetails" />
         <activity android:name=".registerUser" />
         <activity
             android:name=".HomeActivity"
@@ -28,6 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

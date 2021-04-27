@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
@@ -30,9 +31,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private TextView billId,billType,transactionDate;
+    private CardView homeneeds,food,vegetables,shopping,medicine,accomodation;
     private RecyclerView billList;
     private DatabaseReference databaseReference;
     private BillAdapter adapter;
@@ -49,24 +51,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         phone =getIntent().getStringExtra("Phone");
-        logout = findViewById(R.id.toolbar);
-        billcard = findViewById(R.id.BillCard);
-        billId = findViewById(R.id.type);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Bills");
-        //Toast.makeText(HomeActivity.this,phone,Toast.LENGTH_SHORT).show();
-        Query query = databaseReference.orderByChild("Phone").equalTo(phone);
-        databaseReference.keepSynced(true);
-        billList = findViewById(R.id.recycler_view);
-        billList.setHasFixedSize(true);
-        billList.setLayoutManager(new LinearLayoutManager(this));
-            FirebaseRecyclerOptions<Bill> options =
-                    new FirebaseRecyclerOptions.Builder<Bill>()
-                            .setQuery(query, Bill.class)
-                            .build();
-
-            adapter = new BillAdapter(options, HomeActivity.this);
-            billList.setAdapter(adapter);
-
+        logout = findViewById(R.id.logout);
+        homeneeds = findViewById(R.id.grocery);
+        food = findViewById(R.id.food);
+        vegetables = findViewById(R.id.vegetables);
+        shopping = findViewById(R.id.shopping);
+        medicine = findViewById(R.id.medicine);
+        accomodation = findViewById(R.id.accomodation);
+        homeneeds.setOnClickListener(this);
+        food.setOnClickListener(this);
+        vegetables.setOnClickListener(this);
         //Logout button click listener
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +74,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //Navigation Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.myToolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
     }
 
     private void moveToLoginActivity() {
@@ -95,15 +93,36 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         startActivity(toLogin);
     }
 
+    private void movetoGroceryBills(String phone) {
+        Intent groceryBills = new Intent(HomeActivity.this, com.example.ebillings.groceryBills.class);
+        groceryBills.putExtra("Phone",phone);
+        startActivity(groceryBills);
+    }
+
+    private void movetoFoodBills(String phone) {
+        Intent foodBills = new Intent(HomeActivity.this, com.example.ebillings.foodBills.class);
+        foodBills.putExtra("Phone",phone);
+        startActivity(foodBills);
+    }
+
+    private void movetoVegetablebills(String phone) {
+        Intent vegetableBills = new Intent(HomeActivity.this, com.example.ebillings.vegetableBills.class);
+        vegetableBills.putExtra("Phone",phone);
+        startActivity(vegetableBills);
+    }
+
     @Override
-    protected void onStart() {
-        super.onStart();
-        progressDialog = new ProgressDialog(HomeActivity.this);
-        progressDialog.setMessage("Please Wait....");
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        adapter.startListening();
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.grocery:
+                movetoGroceryBills(phone);
+                break;
+            case R.id.vegetables:
+                movetoVegetablebills(phone);
+                break;
+            case R.id.food:
+                movetoFoodBills(phone);
+        }
     }
 
     @Override
@@ -116,13 +135,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.nav_home:
+                break;
+            case R.id.nav_homeneeds:
+                movetoGroceryBills(phone);
+                break;
+            case R.id.nav_food:
+                break;
+            case R.id.nav_accomodation:
+                break;
+            case R.id.nav_financeAnalysis:
+                Intent intent = new Intent(HomeActivity.this,financeAnalysis.class);
+                intent.putExtra("Phone",phone);
+                startActivity(intent);
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

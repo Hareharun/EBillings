@@ -1,7 +1,8 @@
 package com.example.ebillings;
 
 public class BillDetailsModel {
-    String Product;
+    String ProductCode;
+    String ProductName;
     String Quantity;
     String Total;
     String MRP;
@@ -9,19 +10,28 @@ public class BillDetailsModel {
     public BillDetailsModel() {
     }
 
-    public BillDetailsModel(String product, String quantity, String total, String MRP) {
-        Product = product;
+    public BillDetailsModel(String productCode, String productName, String quantity, String total, String MRP) {
+        ProductCode = productCode;
+        ProductName = productName;
         Quantity = quantity;
         Total = total;
         this.MRP = MRP;
     }
 
-    public String getProduct() {
-        return Product;
+    public String getProductCode() {
+        return ProductCode;
     }
 
-    public void setProduct(String product) {
-        Product = product;
+    public void setProductCode(String productCode) {
+        ProductCode = productCode;
+    }
+
+    public String getProductName() {
+        return ProductName;
+    }
+
+    public void setProductName(String productName) {
+        ProductName = productName;
     }
 
     public String getQuantity() {

@@ -4,6 +4,7 @@
     <string name="warning_text">Warning</string>
     <string name="error_text">Error</string>
     <string name="button_ok">OK</string>
+    <string name="Rs">\u20B9</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

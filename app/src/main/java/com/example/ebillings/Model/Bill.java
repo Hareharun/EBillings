@@ -1,4 +1,4 @@
-package com.example.ebillings;
+package com.example.ebillings.Model;
 
 import com.google.gson.JsonArray;
 
@@ -9,8 +9,27 @@ public class Bill {
     private String Mode;
     private String Phone;
     private String id;
-    private String Type;
+    private String type;
     private String bill;
+    private String Purchase_Date;
+
+    public Bill(String amount, String mode, String phone, String id, String Type, String bill, String purchase_Date) {
+        Amount = amount;
+        Mode = mode;
+        Phone = phone;
+        this.id = id;
+        type = Type;
+        this.bill = bill;
+        Purchase_Date = purchase_Date;
+    }
+
+    public String getPurchase_Date() {
+        return Purchase_Date;
+    }
+
+    public void setPurchase_Date(String purchase_Date) {
+        Purchase_Date = purchase_Date;
+    }
 
     public Bill() {
     }
@@ -48,11 +67,11 @@ public class Bill {
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
-    public void setType(String type) {
-        Type = type;
+    public void setType(String Type) {
+        type = Type;
     }
 
     public String getBill() {
@@ -63,12 +82,4 @@ public class Bill {
         this.bill = bill;
     }
 
-    public Bill(String amount, String mode, String phone, String id, String type, String bill) {
-        Amount = amount;
-        Mode = mode;
-        Phone = phone;
-        this.id = id;
-        Type = type;
-        this.bill = bill;
-    }
 }
